@@ -30,11 +30,12 @@ pnpm dev:eve
    pnpm deploy
    ```
 
-The production app requires all three auth variables above and a Vercel deployment hostname. Sign-in is provided by Vercel; allow users with Vercel accounts to sign in as appropriate for your deployment. The 58 configured service connections use Vercel Connect and are scoped to the signed-in user; users must authorize the services they want to use. Review which connections to expose before opening access broadly. Do not commit secrets. Configure them in the Vercel project settings.
+The production app requires all three auth variables above and a Vercel deployment hostname. Sign-in is provided by Vercel; allow users with Vercel accounts to sign in as appropriate for your deployment. The 58 configured service connections use Vercel Connect and are scoped to the signed-in user; users must authorize the services they want to use. Connection tools run without a prompt only when the server explicitly marks them read-only and non-destructive. Other connection actions require user approval in chat. Review which connections to expose before opening access broadly. Do not commit secrets. Configure them in the Vercel project settings.
 
 ## Validate
 
 ```bash
+pnpm test
 pnpm typecheck
 pnpm build:eve
 pnpm build
