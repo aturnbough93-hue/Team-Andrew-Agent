@@ -1,17 +1,33 @@
 ---
-name: Open new issue
+name: Create issue on commit
 
-on: workflow_dispatch  # yamllint disable-line rule:truthy
+on: [push]  # yamllint disable-line rule:truthy
 
 jobs:
-  open-issue:
+  create_issue:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       issues: write
     steps:
-      - run: |
-          gh issue --repo ${{ github.repository }} \
-            create --title "Issue title" --body "Issue body"
+      - name: Create issue using REST API
+        run: |
+          set -euo pipefail
+          issue_body="This issue was automatically created by "
+          issue_body+="the GitHub Action workflow **${ISSUE_WORKFLOW}**."
+          issue_body+=$'\n\n'
+          issue_body+=" The commit hash was: _${ISSUE_SHA}_."
+          payload=$(jq -n \
+            --arg title "Automated issue for commit: $ISSUE_SHA" \
+            --arg body "$issue_body" \
+            '{title: $title, body: $body}')
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --url "https://api.github.com/repos/${ISSUE_REPOSITORY}/issues" \
+            --oauth2-bearer "$GH_TOKEN" \
+            --header "content-type: application/json" \
+            --data "$payload"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_REPOSITORY: ${{ github.repository }}
+          ISSUE_SHA: ${{ github.sha }}
+          ISSUE_WORKFLOW: ${{ github.workflow }}
