@@ -1,29 +1,17 @@
 ---
 name: Open new issue
 
-on:  # yamllint disable-line rule:truthy
-  workflow_dispatch:
-    inputs:
-      title:
-        description: Issue title
-        required: true
-        type: string
-      body:
-        description: Issue body
-        required: true
-        type: string
-
-permissions:
-  contents: read
-  issues: write
+on: workflow_dispatch  # yamllint disable-line rule:truthy
 
 jobs:
   open-issue:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - name: Create issue
-        run: gh issue create --title "$ISSUE_TITLE" --body "$ISSUE_BODY"
+      - run: |
+          gh issue --repo ${{ github.repository }} \
+            create --title "Issue title" --body "Issue body"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_TITLE: ${{ inputs.title }}
-          ISSUE_BODY: ${{ inputs.body }}
