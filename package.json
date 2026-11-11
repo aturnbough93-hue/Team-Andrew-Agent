@@ -1,5 +1,5 @@
 {
-  "name": "team-4b1ed8f0s-agent",
+  "name": "andrew-ai-agent",
   "version": "0.0.0",
   "type": "module",
   "imports": {
@@ -12,16 +12,13 @@
     "dev": "next dev",
     "eval": "eve eval",
     "start": "next start",
+    "test": "node --test agent/lib/connection-approval.test.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
     "start:eve": "eve start"
   },
   "dependencies": {
-    "@vercel/connect": "0.4.2",
-    "ai": "7.0.153",
-    "eve": "0.83.2",
-    "zod": "4.6.6",
     "@radix-ui/react-use-controllable-state": "1.2.2",
     "@shadcn/react": "0.3.1",
     "@shikijs/core": "3.23.0",
@@ -32,13 +29,17 @@
     "@streamdown/math": "1.0.2",
     "@streamdown/mermaid": "1.0.2",
     "@tailwindcss/postcss": "4.3.0",
+    "@vercel/connect": "0.4.2",
+    "ai": "7.0.153",
+    "better-auth": "1.7.17",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
+    "eve": "0.83.2",
     "lucide-react": "1.16.0",
     "motion": "12.40.0",
     "nanoid": "5.1.16",
-    "next": "16.4.1",
+    "next": "16.4.5",
     "radix-ui": "1.4.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
@@ -47,13 +48,13 @@
     "tailwind-merge": "3.6.0",
     "tailwindcss": "4.3.0",
     "use-stick-to-bottom": "1.1.4",
-    "better-auth": "1.7.7"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "24.13.2",
-    "typescript": "6.0.3",
     "@types/react": "19.2.15",
-    "@types/react-dom": "19.2.3"
+    "@types/react-dom": "19.2.3",
+    "typescript": "6.0.3"
   },
   "engines": {
     "node": "24.x"
