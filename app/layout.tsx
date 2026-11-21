@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { readonly children: ReactNode 
     <html lang="en">
       <body>
         <TooltipProvider>{children}</TooltipProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
